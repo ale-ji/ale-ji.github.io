@@ -1,0 +1,194 @@
+<!DOCTYPE html>
+<link href="https://fonts.googleapis.com/css?family=ZCOOL+KuaiLe&display=swap" rel="stylesheet">
+
+<html>
+
+  <head>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <style>
+      canvas {
+        /* border: 1px solid #d3d3d3; */
+        background-color: #f1f1f1;
+        z-index: 0;
+        position: absolute;
+        margin: auto;
+        top: 0;
+        right: 0;
+        bottom: 0;
+        left: 0;
+      }
+
+      #clock {
+        float: right;
+        color: white;
+        font-family: 'ZCOOL KuaiLe', cursive;
+        font-size: 24px;
+
+      }
+
+      #days {
+        float: right;
+        color: white;
+        font-family: 'ZCOOL KuaiLe', cursive;
+        font-size: 24px;
+      }
+
+      #gemsCollected {
+        float: left;
+        color: white;
+        font-family: 'ZCOOL KuaiLe', cursive;
+        font-size: 24px;
+      }
+
+      /* Text appears in box */
+      #typedtext {
+        position: absolute;
+        background-color: black;
+        border: 10px;
+        border-style: double;
+        border-radius: 18px;
+        border-color: white;
+        color: white;
+        width: 54%;
+        height: 25%;
+        top: 80%;
+        margin-left: 22%;
+        font-family: 'ZCOOL KuaiLe', cursive;
+        font-size: 300%;
+        letter-spacing: 6px;
+        text-align: center;
+      }
+
+      #image {
+        height: 5%;
+        width: 5%;
+      }
+
+      body {
+        background-color: black;
+      }
+
+      .column {
+        width: 10%;
+        padding: 5px;
+      }
+
+      /* Clear floats after image containers */
+      .row::after {
+        content: "";
+        clear: both;
+        display: table;
+      }
+    </style>
+  </head>
+
+  <body>
+    <div id="days"></div>
+    <div id="clock"></div>
+    <div id="gemsCollected">Gems Required:</div>
+    <div class="row">
+      <div class="column">
+        <img src="Diamond.png">
+      </div>
+      <div class="column">
+        <img src="Gold.png">
+      </div>
+      <div class="column">
+        <img src="Emerald.png">
+      </div>
+    </div>
+    <center>
+      <canvas id="myCanvas"></canvas>
+    </center>
+    <div id="typedtext"></div>
+
+    <script src="game.js">
+    </script>
+    <script src="keycodes.js">
+    </script>
+    <script src="inputs.js">
+    </script>
+    <script src="worldMap.js">
+    </script>
+    <script>
+      var dateNumber = 147 - 1;
+      Dcounter = -1;
+      var month, day;
+
+      function calendar() {
+        Dcounter++;
+        dateNumber++;
+        if (dateNumber > 0 && dateNumber <= 31) {
+          month = "January";
+          day = dateNumber
+        } else if (dateNumber > 31 && dateNumber <= 59) {
+          month = "February";
+          day = dateNumber - 31
+        } else if (dateNumber > 59 && dateNumber <= 90) {
+          month = "February";
+          day = dateNumber - 59
+        } else if (dateNumber > 90 && dateNumber <= 120) {
+          month = "February";
+          day = dateNumber - 90
+        } else if (dateNumber > 120 && dateNumber <= 151) {
+          month = "May"
+          day = dateNumber - 120
+        } else if (dateNumber > 151 && dateNumber <= 181) {
+          month = "June"
+          day = dateNumber - 151
+        } else if (dateNumber > 181 && dateNumber <= 212) {
+          month = "July"
+          day = dateNumber - 181
+        } else if (dateNumber > 212 && dateNumber <= 243) {
+          month = "August"
+          day = dateNumber - 212
+        } else if (dateNumber > 243 && dateNumber <= 273) {
+          month = "September"
+          day = dateNumber - 243
+        } else if (dateNumber > 273 && dateNumber <= 304) {
+          month = "October"
+          day = dateNumber - 273
+        } else if (dateNumber > 304 && dateNumber <= 334) {
+          month = "December"
+          day = dateNumber - 304
+        } else if (dateNumber > 365) {
+          dateNumber = 0
+        }
+        console.log(counter);
+        document.getElementById("clock").innerHTML = month + " " + day + " 2019 " + "--------------" + " Days Passed: " + Dcounter
+        // document.getElementById("days").innerHTML = "Days Passed: " + Dcounter
+      }
+      calendar();
+      setInterval(calendar, 20000);
+    </script>
+    <script>
+      // each item in array is new line
+      var aText = new Array(
+        "Where's the gem?",
+        "We have to get",
+        "outta here"
+      );
+      var bText = new Array(
+        "Man big snail",
+        "uh oh wucko"
+      );
+
+      var iSpeed = 100; // time delay of print out
+      var iIndex = 0; // start printing array at this posision
+      var iArrLength = aText[0].length; // the length of the text array
+      // var bLength = bText[0].length;
+      var iScrollAt = 20; // start scrolling up at this many lines
+      var iTextPos = 0; // initialise text position
+      var sContents = ''; // initialise contents variable
+      var iRow; // initialise current row
+
+      // animate text to look like it's being typed
+      function typewriter() {
+        sContents = ' ';
+        iRow = Math.max(0, iIndex - iScrollAt);
+        var destination = document.getElementById("typedtext");
+      }
+    </script>
+  </body>
+
+</html>

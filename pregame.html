@@ -5,12 +5,12 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <style>
       canvas {
-        /* border: 1px solid #d3d3d3; */
         background-color: #f1f1f1;
         margin-top: 12%;
         z-index: 0;
       }
 
+      /* creates box for messages */
       .messages {
         position: absolute;
         background-color: black;
@@ -35,66 +35,85 @@
         height: 14%;
         outline: 0;
       }
+
+      span {
+        border-right: .05em solid;
+        animation: caret 1s steps(1) infinite;
+      }
+
+      @keyframes caret {
+        50% {
+          border-color: transparent;
+        }
+      }
     </style>
   </head>
 
   <body background="stage1.png">
     <center>
+
+      <!-- Image of door as button -->
+      <!-- When door is clicked, player enters maze -->
       <input id="door" type="image" src="door.png" onclick="goMainGame()">
     </center>
 
     <div class="messages" id="typedtext"></div>
     <script>
-      // set up text to print, each item in array is new line
-      var dataText = [
-        ["Have you come to", "reclaim the gem?"]
-        ["I'll give it to you...", "if you can make it out alive"]
-      ]
-      var iSpeed = 100; // time delay of print out
-      var iIndex = 0; // start printing array at this posision
-      var iArrLength = aText[0].length; // the length of the text array
-      var iScrollAt = 20; // start scrolling up at this many lines
-
-      var iTextPos = 0; // initialise text position
-      var sContents = ''; // initialise contents variable
-      var iRow; // initialise current row
-
-      function typewriter(text, i, fnCallBack) {
-        if (i < (text.length)) {
-          // add next character to h1
-          document.querySelector("h1").innerHTML = text.substring(0, i + 1) +
-            '<span aria-hidden="true"></span>';
-
-          setTimeout(function() {
-            typeWriter(text, i + 1, fnCallback)
-          }, 100);
-        }
-
-        sContents = ' ';
-        iRow = Math.max(0, iIndex - iScrollAt);
-        var destination = document.getElementById("typedtext");
-
-        while (iRow < iIndex) {
-          sContents += aText[iRow++] + '<br />';
-        }
-        destination.innerHTML = sContents + aText[iIndex].substring(0, iTextPos) + "_";
-        if (iTextPos++ == iArrLength) {
-          iTextPos = 0;
-          iIndex++;
-          if (iIndex != aText.length) {
-            iArrLength = aText[iIndex].length;
-            setTimeout("typewriter()", 500);
-          }
-        } else {
-          setTimeout("typewriter()", iSpeed);
-        }
-      }
-
-      typewriter();
-
+      // once button clicked goes to maze
+      // purpose of this page is to give story background for maze
       function goMainGame() {
         window.location = "maingame.html";
       }
+
+      document.addEventListener('DOMContentLoaded', function(event) {
+        // two separate messages to be shown
+        var dataText = [
+          "Have you come to find the gems?",
+          "I'll give it to you...if you can make it out alive"
+        ]
+
+        // keeps calling itself until text fully displayed
+        function typeWriter(text, i, fnCallback) {
+          // when text not finished
+          if (i < (text.length)) {
+            document.getElementById("typedtext").innerHTML =
+              // each iteration, substring extends, another character shown
+              text.substring(0, i + 1) + '<span aria-hidden="true"></span>';
+
+            // call function again
+            setTimeout(function() {
+              typeWriter(text, i + 1, fnCallback)
+            }, 100);
+          }
+          // when text finished
+          else if (typeof fnCallback == 'function') {
+            // call callback after timeout
+            setTimeout(fnCallback, 2000);
+          }
+        }
+
+        // start a typewriter animation for a text in the dataText array
+        function StartTextAnimation(i) {
+          // if iteration goes past number of characters
+          // wait 20 seconds and do it again
+          // player takes too long to act, just asks again
+          if (typeof dataText[i] == 'undefined') {
+            setTimeout(function() {
+              StartTextAnimation(0);
+            }, 20000);
+          }
+          // check if dataText[i] exists
+          if (i < dataText[i].length) {
+            // text exists! start typewriter animation
+            typeWriter(dataText[i], 0, function() {
+              // after one message animated, start next
+              StartTextAnimation(i + 1);
+            });
+          }
+        }
+        // start the text animation
+        StartTextAnimation(0);
+      });
     </script>
   </body>
 

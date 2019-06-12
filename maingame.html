@@ -23,7 +23,6 @@
         color: white;
         font-family: 'ZCOOL KuaiLe', cursive;
         font-size: 24px;
-
       }
 
       #days {
@@ -59,6 +58,11 @@
         text-align: center;
       }
 
+      .gems {
+        height: 100%;
+        width: 100%;
+      }
+
       #image {
         height: 5%;
         width: 5%;
@@ -88,13 +92,13 @@
     <div id="gemsCollected">Gems Required:</div>
     <div class="row">
       <div class="column">
-        <img src="Diamond.png">
+        <img class="gems" src="Heart.png">
       </div>
       <div class="column">
-        <img src="Gold.png">
+        <img class="gems" src="diamond.png">
       </div>
       <div class="column">
-        <img src="Emerald.png">
+        <img class="gems" src="Emerald.png">
       </div>
     </div>
     <center>
@@ -162,21 +166,18 @@
       setInterval(calendar, 20000);
     </script>
     <script>
+      setInterval(typewriter, 10000);
+
       // each item in array is new line
       var aText = new Array(
-        "Where's the gem?",
-        "We have to get",
-        "outta here"
-      );
-      var bText = new Array(
-        "Man big snail",
-        "uh oh wucko"
+        "This snail is so spooky...",
+        "We have to find the gems",
+        "and get out, quickly!"
       );
 
       var iSpeed = 100; // time delay of print out
       var iIndex = 0; // start printing array at this posision
       var iArrLength = aText[0].length; // the length of the text array
-      // var bLength = bText[0].length;
       var iScrollAt = 20; // start scrolling up at this many lines
       var iTextPos = 0; // initialise text position
       var sContents = ''; // initialise contents variable
@@ -187,6 +188,21 @@
         sContents = ' ';
         iRow = Math.max(0, iIndex - iScrollAt);
         var destination = document.getElementById("typedtext");
+
+        while (iRow < iIndex) {
+          sContents += aText[iRow++] + '<br />';
+        }
+        destination.innerHTML = sContents + aText[iIndex].substring(0, iTextPos) + "_";
+        if (iTextPos++ == iArrLength) {
+          iTextPos = 0;
+          iIndex++;
+          if (iIndex != aText.length) {
+            iArrLength = aText[iIndex].length;
+            setTimeout("typewriter()", 500);
+          }
+        } else {
+          setTimeout("typewriter()", iSpeed);
+        }
       }
     </script>
   </body>

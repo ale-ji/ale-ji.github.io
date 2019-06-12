@@ -1,238 +1,178 @@
-<html>
+<!DOCTYPE html>
+<head>
+  <style>
+	body {
+		background-color: black;
+	}
+	
+	#div1 {
+      width: 40px;
+      height: 20px;
+    }
+	
+	
+	#title {
+		color: white;
+	}
+	
+	td{ 
+	 font-size: 75%;
+	 height: 60px;
+	 background-color: white;
+	}
+	
+	th {
+	 font-size: 75%
+	}
+	
+	/* Text appears in on top*/
+	
+	#display {
+		color: white;
+		font-family: Courier New, monospace;
+	}
+  </style>
+</head>
+<body onload='typing()'>
+  <script>
+	var i = 0;
+	var text = "Please place one of the jewels on the 12th, one jewel on the 14th, and one jewel on the 20th."
+	var speed = 100;
+	
+	function typing() {
+		if (i < text.length) { 
+		document.getElementById('display').innerHTML += text.charAt(i);
+		i++;
+		setTimeout(typing, speed);
+		}
+	}
 
-  <head>
-    <meta charset="UTF-8">
-    <style>
-      .box001 {
-        float: left;
-        width: 75px;
-        height: 15px;
-        margin: 12px;
-        padding: 10px;
-        border: 1px solid black;
-      }
+   //allows the image to be dropped
+	function allowDrop001(ev) {
+      ev.preventDefault();
+    }
 
-      .box002 {
-        float: left;
-        width: 75px;
-        height: 50px;
-        border: 1px solid white;
-      }
+	function allowDrop002(ev) {
+      ev.preventDefault();
+    }
+	
+	function allowDrop003(ev) {
+      ev.preventDefault();
+    }
+    //sets data type and the value of the dragged data
+	function drag001(ev) {
+      ev.dataTransfer.setData("text", ev.target.id);
+    }
+	
+	function drag002(ev) {
+      ev.dataTransfer.setData("text", ev.target.id);
+    }
+	
+	function drag003(ev) {
+      ev.dataTransfer.setData("text", ev.target.id);
+    }
+	//causes a drop event to occur when the image is dropped
+    function drop001(ev) {
+      ev.preventDefault();
+      var data = ev.dataTransfer.getData("text");
+      ev.target.appendChild(document.getElementById(data));
+    }
+	
+	function drop002(ev) {
+      ev.preventDefault();
+      var data = ev.dataTransfer.getData("text");
+      ev.target.appendChild(document.getElementById(data));
+    }
+	
+	function drop003(ev) {
+      ev.preventDefault();
+      var data = ev.dataTransfer.getData("text");
+      ev.target.appendChild(document.getElementById(data));
+    }
+  </script>
+<center><p id='display'></p></center>
+  <!--this image is what will be dragged and dropped into the calender-->
+<img id='drag1' src='placeholder1.png' draggable='true' ondragstart='drag001(event)' width='39px' height='39px'>
+<img id='drag1' src='placeholder2.png' draggable='true' ondragstart='drag002(event)' width='39px' height='39px'>
+<img id='drag1' src='placeholder3.png' draggable='true' ondragstart='drag003(event)' width='39px' height='39px'>
 
-      /* img {
-      width: 16px;
-      height: 16px;
-    } */
-    </style>
-  </head>
-
-  <body>
-    <div class='box002' ondrop='drop001(event)'>
-      <div ondragstart='dragStart001(event)' draggable='true' id='target001'>one</div>
-    </div>
-
-    <div class='box002' ondrop='drop002(event)'>
-      <div ondragstart='dragStart002(event)' draggable='true' id='target002'>two</div>
-    </div>
-
-    <div class='box002' ondrop='drop003(event)'>
-      <div ondragstart='dragStart003(event)' draggable='true' id='target003'>three</div>
-    </div>
-
-    <div class='box002' ondrop='drop004(event)'>
-      <div ondragstart='dragStart004(event)' draggable='true' id='target004'><img src='placeholder.png' width='50px' height='50px'></div>
-    </div>
-
-    <br><br><br><br>
-
-    <center>
-      <h1>JUNE</h1>
-    </center>
-    <br>
-    <center>
-      <table cellspacing='0px' cellpadding='5px' border='1px'>
-        <tr>
-          <th>Sunday</th>
-          <th>Monday</th>
-          <th>Tuesday</th>
-          <th>Wednesday</th>
-          <th>Thursday</th>
-          <th>Friday</th>
-          <th>Saturday</th>
-        </tr>
-        <tr>
-          <td></td>
-          <td></td>
-          <td></td>
-          <td></td>
-          <td></td>
-          <td></td>
-          <td>
-            <div class='box002' ondrop='drop004(event)' ondragover='allowDrop001(event)' id='place001'>1</div>
-          </td>
-        </tr>
-        <tr>
-          <td align='left' valign='top'>
-            <div class='box002' ondrop='drop005(event)' ondragover='allowDrop002(event)' id='place002'>2</div>
-          </td>
-          <td align='left' valign='top'>
-            <div class='box002' ondrop='drop006(event)' ondragover='allowDrop003(event)' id='place003'>3</div>
-          </td>
-          <td align='left' valign='top'>
-            <div class='box002' ondrop='drop007(event)' ondragover='allowDrop004(event)' id='place004'>4</div>
-          </td>
-          <td align='left' valign='top'>
-            <div class='box002' ondrop='drop008(event)' ondragover='allowDrop005(event)' id='place005'>5</div>
-          </td>
-          <td align='left' valign='top'>
-            <div class='box002' ondrop='drop009(event)' ondragover='allowDrop006(event)' id='place006'>6</div>
-          </td>
-          <td align='left' valign='top'>
-            <div class='box002' ondrop='drop0010(event)' ondragover='allowDrop007(event)' id='place007'>7</div>
-          </td>
-          <td align='left' valign='top'>
-            <div class='box002' ondrop='drop0011(event)' ondragover='allowDrop008(event)' id='place008'>8</div>
-          </td>
-        </tr>
-        <tr>
-          <td align='left' valign='top'>
-            <div class='box002' ondrop='drop0012(event)' ondragover='allowDrop009(event)' id='place009'>9</div>
-          </td>
-          <td align='left' valign='top'>
-            <div class='box002' ondrop='drop0013(event)' ondragover='allowDrop0010(event)' id='place0010'>10</div>
-          </td>
-          <td align='left' valign='top'>
-            <div class='box002' ondrop='drop0014(event)' ondragover='allowDrop0011(event)' id='place0011'>11</div>
-          </td>
-          <td>
-            <div class='box002' ondrop='drop0015(event)' ondragover='allowDrop0012(event)' id='place0012'>12</div>
-          </td>
-          <td align='left' valign='top'>
-            <div class='box002' ondrop='drop0016(event)' ondragover='allowDrop0013(event)' id='place0013'>13</div>
-          </td>
-          <td align='left' valign='top'>
-            <div class='box002' ondrop='drop0017(event)' ondragover='allowDrop0014(event)' id='place0014'>14</div>
-          </td>
-          <td align='left' valign='top'>
-            <div class='box002' ondrop='drop0018(event)' ondragover='allowDrop0015(event)' id='place0015'>15</div>
-          </td>
-        </tr>
-        <tr>
-          <td align='left' valign='top'>
-            <div class='box002' ondrop='drop0019(event)' ondragover='allowDrop0016(event)' id='place0016'>16</div>
-          </td>
-          <td align='left' valign='top'>
-            <div class='box002' ondrop='drop0020(event)' ondragover='allowDrop0017(event)' id='place0017'>17</div>
-          </td>
-          <td align='left' valign='top'>
-            <div class='box002' ondrop='drop0021(event)' ondragover='allowDrop0018(event)' id='place0018'>18</div>
-          </td>
-          <td align='left' valign='top'>
-            <div class='box002' ondrop='drop0022(event)' ondragover='allowDrop0019(event)' id='place0019'>19</div>
-          </td>
-          <td align='left' valign='top'>
-            <div class='box002' ondrop='drop0023(event)' ondragover='allowDrop0020(event)' id='place0020'>20</div>
-          </td>
-          <td align='left' valign='top'>
-            <div class='box002' ondrop='drop0024(event)' ondragover='allowDrop0021(event)' id='place0021'>21</div>
-          </td>
-          <td align='left' valign='top'>
-            <div class='box002' ondrop='drop0025(event)' ondragover='allowDrop0022(event)' id='place0022'>22</div>
-          </td>
-        </tr>
-        <tr>
-          <td align='left' valign='top'>
-            <div class='box002' ondrop='drop0026(event)' ondragover='allowDrop0023(event)' id='place0023'>23</div>
-          </td>
-          <td align='left' valign='top'>
-            <div class='box002' ondrop='drop0027(event)' ondragover='allowDrop0024(event)' id='place0024'>24</div>
-          </td>
-          <td align='left' valign='top'>
-            <div class='box002' ondrop='drop0028(event)' ondragover='allowDrop0025(event)' id='place0025'>25</div>
-          </td>
-          <td align='left' valign='top'>
-            <div class='box002' ondrop='drop0029(event)' ondragover='allowDrop0026(event)' id='place0026'>26</div>
-          </td>
-          <td align='left' valign='top'>
-            <div class='box002' ondrop='drop0030(event)' ondragover='allowDrop0027(event)' id='place0027'>27</div>
-          </td>
-          <td align='left' valign='top'>
-            <div class='box002' ondrop='drop0031(event)' ondragover='allowDrop0028(event)' id='place0028'>28</div>
-          </td>
-          <td align='left' valign='top'>
-            <div class='box002' ondrop='drop0032(event)' ondragover='allowDrop0029(event)' id='place0029'>29</div>
-          </td>
-        </tr>
-        <tr>
-          <td align='left' valign='top'>
-            <div class='box002' ondrop='drop0033(event)' ondragover='allowDrop0030(event)' id='place0030'>30</div>
-          </td>
-          <td></td>
-          <td></td>
-          <td></td>
-          <td></td>
-          <td></td>
-          <td></td>
-        </tr>
-      </table>
-    </center>
-    <script>
-      function dragStart001(event) {
-        event.dataTransfer.setData('choice001', event.target.id);
-      }
-
-      function dragStart002(event) {
-        event.dataTransfer.setData('choice002', event.target.id);
-      }
-
-      function dragStart003(event) {
-        event.dataTransfer.setData('choice003', event.target.id);
-      }
-
-      function dragStart004(event) {
-        event.dataTransfer.setData('choice004', event.target.id);
-      }
-
-      function allowDrop001(event) {
-        event.preventDefault();
-      }
-
-      function allowDrop002(event) {
-        event.preventDefault();
-      }
-
-      function allowDrop003(event) {
-        event.preventDefault();
-      }
-
-      function allowDrop004(event) {
-        event.preventDefault();
-      }
-
-      function drop004(event) {
-        var data = event.dataTransfer.getData('choice001');
-        event.target.appendChild(document.getElementById(data));
-        place001.innerHTMl = 'one';
-      }
-
-      function drop005(event) {
-        var data = event.dataTransfer.getData('choice002');
-        event.target.appendChild(document.getElementById(data));
-        place002.innerHTMl = 'two';
-      }
-
-      function drop006(event) {
-        var data = event.dataTransfer.getData('choice003');
-        event.target.appendChild(document.getElementById(data));
-        place003.innerHTMl = 'three';
-      }
-
-      function drop007(event) {
-        var data = event.dataTransfer.getData('choice004');
-        event.target.appendChild(document.getElementById(data));
-        place004.innerHTMl = "<img src='placeholder.png' width='50px' height='50px'>";
-      }
-    </script>
-  </body>
-
+<!--This table is the calender-->
+<center><table cellspacing='0px' cellpadding='5px' border='1px'>
+  <tr>
+	<th id='title' colspan='7' height='45px' style='font-size: 50px' bgcolor='red'>JUNE</th>
+  </tr>
+  <tr>
+    <th width='75px' bgcolor='white'>SUNDAY</th>
+    <th width='75px' bgcolor='white'>MONDAY</th>
+    <th width='75px' bgcolor='white'>TUESDAY</th>
+    <th width='75px' bgcolor='white'>WEDNESDAY</th>
+    <th width='75px' bgcolor='white'>THURSDAY</th>
+    <th width='75px' bgcolor='white'>FRIDAY</th>
+    <th width='75px' bgcolor='white'>SATURDAY</th>
+  </tr>
+  <tr>
+    <td align='left' valign='top'></td>
+    <td align='left' valign='top'></td>
+    <td align='left' valign='top'></td>
+    <td align='left' valign='top'></td>
+    <td align='left' valign='top'></td>
+    <td align='left' valign='top'></td>
+    <td align='left' valign='top'>1</td>
+  </tr>
+   <tr>
+    <td align='left' valign='top'>2</td>
+    <td align='left' valign='top'>3</td>
+    <td align='left' valign='top'>4</td>
+    <td align='left' valign='top'>5</td>
+    <td align='left' valign='top'>6</td>
+    <td align='left' valign='top'>7</td>
+    <td align='left' valign='top'>8</td>
+  </tr>
+   <tr>
+    <td align='left' valign='top'>9</td>
+    <td align='left' valign='top'>10</td>
+    <td align='left' valign='top'>11</td>
+    <td align='left' valign='top'>
+		12 <center><div id='div1' ondrop='drop001(event)' ondragover='allowDrop002(event)'></div></center>
+	</td>
+    <td align='left' valign='top'>13</td>
+   <!--This column contains the div in which the image will be dropped in--> 
+    <td align='left' valign='top'>
+		14 <center><div id='div1' ondrop='drop002(event)' ondragover='allowDrop001(event)'></div></center>
+	</td>
+    <td align='left' valign='top'>15</td>
+   </tr>
+   <tr>
+    <td align='left' valign='top'>16</td>
+    <td align='left' valign='top'>17</td>
+    <td align='left' valign='top'>18</td>
+    <td align='left' valign='top'>19</td>
+    <td align='left' valign='top'>
+		20 <center><div id='div1' ondrop='drop003(event)' ondragover='allowDrop003(event)'></div></center>
+	</td>
+    <td align='left' valign='top'>21</td>
+    <td align='left' valign='top'>22</td>
+  </tr>
+   <tr>
+    <td align='left' valign='top'>23</td>
+    <td align='left' valign='top'>24</td>
+    <td align='left' valign='top'>25</td>
+    <td align='left' valign='top'>26</td>
+    <td align='left' valign='top'>27</td>
+    <td align='left' valign='top'>28</td>
+    <td align='left' valign='top'>29</td>
+  </tr>
+   <tr>
+    <td align='left' valign='top'>30</td>
+    <td align='left' valign='top'></td>
+    <td align='left' valign='top'></td>
+    <td align='left' valign='top'></td>
+    <td align='left' valign='top'></td>
+    <td align='left' valign='top'></td>
+    <td align='left' valign='top'></td>
+  </tr>
+  
+  
+  <tr>
+</body>
 </html>

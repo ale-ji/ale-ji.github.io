@@ -10,8 +10,9 @@
     #div1 {
       width: 60%;
       height: 60%;
+      width: 40px;
+      height: 20px;
     }
-
 
     #title {
       color: white;
@@ -30,7 +31,6 @@
     }
 
     /* Text appears in on top*/
-
     #display {
       color: white;
       font-family: 'ZCOOL KuaiLe', cursive;
@@ -52,7 +52,6 @@
         setTimeout(typing, speed);
       }
     }
-
     //allows the image to be dropped
     function allowDrop001(ev) {
       ev.preventDefault();
@@ -103,7 +102,6 @@
   <img id='drag1' src='heart.png' draggable='true' ondragstart='drag001(event)' width='39px' height='39px'>
   <img id='drag1' src='diamond.png' draggable='true' ondragstart='drag002(event)' width='39px' height='39px'>
   <img id='drag1' src='emerald.png' draggable='true' ondragstart='drag003(event)' width='39px' height='39px'>
-
   <!--This table is the calender-->
   <center>
     <table cellspacing='0px' cellpadding='5px' border='1px'>
@@ -144,6 +142,7 @@
         <td align='left' valign='top'>
           12 <center>
             <div id='div1' ondrop='drop001(event)' ondragover='allowDrop002(event)'></div>
+            <div id='div1' ondrop='drop001(event)' ondragover='allowDrop001(event)'></div>
           </center>
         </td>
         <td align='left' valign='top'>13</td>
@@ -151,6 +150,7 @@
         <td align='left' valign='top'>
           14 <center>
             <div id='div1' ondrop='drop002(event)' ondragover='allowDrop001(event)'></div>
+            <div id='div1' ondrop='drop002(event)' ondragover='allowDrop002(event)'></div>
           </center>
         </td>
         <td align='left' valign='top'>15</td>
@@ -186,9 +186,7 @@
         <td align='left' valign='top'></td>
         <td align='left' valign='top'></td>
       </tr>
-
-
-      <tr>
+    </table>
 </body>
 
 </html>

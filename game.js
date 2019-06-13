@@ -89,12 +89,12 @@ function camera() {
   if (myGamePiece.y < canvas.height / 2) {
     cameray = 0
   }
-  if (myGamePiece.x > 34 * Tile_W - canvas.width / 2) {
-    camerax = -(34 * Tile_W - canvas.width);
+  if (myGamePiece.x > 34 * 140 - canvas.width / 2) {
+    camerax = -(34 * 140 - canvas.width);
     // console.log(columns * Tile_W - canvas.width)
   }
-  if (myGamePiece.y > 15 * Tile_H - canvas.height / 2) {
-    cameray = -(15 * Tile_H - canvas.height);
+  if (myGamePiece.y > 15 * 140 - canvas.height / 2) {
+    cameray = -(15 * 140 - canvas.height);
     // console.log(rows * Tile_H - canvas.height / 2)
   }
   ctx.translate(camerax, cameray);

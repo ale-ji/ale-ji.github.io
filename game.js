@@ -12,7 +12,7 @@ ctx.canvas.height = 400;
 ctx.canvas.width = 400;
 
 var gem1 = new Image();
-gem1.src = "Heart.png";
+gem1.src = "heart.png";
 
 var gem2 = new Image();
 gem2.src = "Diamond.png";

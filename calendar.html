@@ -1,251 +1,276 @@
-<!DOCTYPE html>
-<link href="https://fonts.googleapis.com/css?family=ZCOOL+KuaiLe&display=swap" rel="stylesheet">
+<html id="screen" class="black">
+  <link href="https://fonts.googleapis.com/css?family=ZCOOL+KuaiLe&display=swap" rel="stylesheet">
 
-<head>
-  <style>
-    body {
-      background-color: black;
-    }
-
-    #div1 {
-      width: 40px;
-      height: 20px;
-    }
-
-    #title {
-      color: white;
-    }
-
-    td {
-      font-size: 100%;
-      height: 60px;
-      background-color: white;
-      font-family: 'ZCOOL KuaiLe', cursive;
-    }
-
-    th {
-      font-size: 100%;
-      font-family: 'ZCOOL KuaiLe', cursive;
-    }
-
-    /* Text appears in on top*/
-    #display {
-      color: white;
-      font-family: 'ZCOOL KuaiLe', cursive;
-      font-size: 200%;
-    }
-	
-	/* the overlay */
-	#overlay {
-		position: fixed;
-		display: none;
-		width: 100%;
-		height: 100%;
-		top: 0;
-		left: 0;
-		right: 0;
-		bottom: 0;
-		background-color: black;
-	}
-	
-	/* the text in the overlay */
-	#text {
-		position: absolute;
-		top: 50%;
-		left: 50%;
-		font-size: 50px;
-		color: white;
-		transform: translate(-50%,-50%);
-	}
-  </style>
-</head>
-
-<body onload='typing()'>
-  <script>
-    var i = 0;
-    
-	//instructions
-	
-	var text = "Please place one of the gems on the 12th, one gem on the 14th, and one gem on the 20th."
-    //the speed at which the instructions are typed
-	var speed = 100;
-
-	//how many are dragged in 
-	var counter = 0;
-	
-    //adds to the counter; if the counter reaches 3, the overlay opens
-	function add() {
-		counter++;
-		
-		if (counter == 3){
-			on();
-		}
-	}
-	
-	function typing() {
-      if (i < text.length) {
-        document.getElementById('display').innerHTML += text.charAt(i);
-        i++;
-        setTimeout(typing, speed);
+  <head>
+    <style>
+      html.overlay {
+        background: url(end.png) no-repeat center center fixed;
+        -webkit-background-size: cover;
+        -moz-background-size: cover;
+        -o-background-size: cover;
+        background-size: cover;
       }
-    }
-    //allows the image to be dropped
-    function allowDrop001(ev) {
-      ev.preventDefault();
-    }
 
-    function allowDrop002(ev) {
-      ev.preventDefault();
-    }
+      html.black {
+        background-color: black;
+      }
 
-    function allowDrop003(ev) {
-      ev.preventDefault();
-    }
-    //sets data type and the value of the dragged data
-    function drag001(ev) {
-      ev.dataTransfer.setData("text", ev.target.id);
-    }
+      #div1 {
+        width: 40px;
+        height: 20px;
+      }
 
-    function drag002(ev) {
-      ev.dataTransfer.setData("text", ev.target.id);
-    }
+      #title {
+        color: white;
+      }
 
-    function drag003(ev) {
-      ev.dataTransfer.setData("text", ev.target.id);
-    }
-    //causes a drop event to occur when the image is dropped
-    function drop001(ev) {
-      ev.preventDefault();
-      var data = ev.dataTransfer.getData("text");
-      ev.target.appendChild(document.getElementById(data));
-	  
-	  add();
-    }
+      td {
+        font-size: 100%;
+        height: 60px;
+        background-color: white;
+        font-family: 'ZCOOL KuaiLe', cursive;
+      }
 
-    function drop002(ev) {
-      ev.preventDefault();
-      var data = ev.dataTransfer.getData("text");
-      ev.target.appendChild(document.getElementById(data));
-	  
-	  add();
-    }
+      th {
+        font-size: 100%;
+        font-family: 'ZCOOL KuaiLe', cursive;
+      }
 
-    function drop003(ev) {
-      ev.preventDefault();
-      var data = ev.dataTransfer.getData("text");
-      ev.target.appendChild(document.getElementById(data)); 
-	  
-	  add();
-    }
-	
-	//opens overlay
-	function on() {
-		document.getElementById("overlay").style.display = "block";
-	}
-	
-	function restart() {
-		window.location = "index.html";
-	}
-  
-  </script>
-  <div id='overlay'>
-	<div id='text'>
-		YOU WIN!
-		<br>
-		<center><button class="text" type="button" onclick="restart()">PLAY AGAIN</center>
-	</div>
-  </div>
-  
-  <!--displays the instructions-->
-  <center>
-    <p id='display'></p>
-  </center>
-  <!--this image is what will be dragged and dropped into the calender-->
-  <img id='drag1' src='Heart.png' draggable='true' ondragstart='drag001(event)' width='39px' height='39px'>
-  <img id='drag1' src='Diamond.png' draggable='true' ondragstart='drag002(event)' width='39px' height='39px'>
-  <img id='drag1' src='Emerald.png' draggable='true' ondragstart='drag003(event)' width='39px' height='39px'>
-  <!--This table is the calender-->
-  <center>
-    <table cellspacing='0px' cellpadding='5px' border='1px'>
-      <tr>
-        <th id='title' colspan='7' height='45px' style='font-size: 50px' bgcolor='red'>JUNE</th>
-      </tr>
-      <tr>
-        <th width='75px' bgcolor='white'>SUNDAY</th>
-        <th width='75px' bgcolor='white'>MONDAY</th>
-        <th width='75px' bgcolor='white'>TUESDAY</th>
-        <th width='75px' bgcolor='white'>WEDNESDAY</th>
-        <th width='75px' bgcolor='white'>THURSDAY</th>
-        <th width='75px' bgcolor='white'>FRIDAY</th>
-        <th width='75px' bgcolor='white'>SATURDAY</th>
-      </tr>
-      <tr>
-        <td align='left' valign='top'></td>
-        <td align='left' valign='top'></td>
-        <td align='left' valign='top'></td>
-        <td align='left' valign='top'></td>
-        <td align='left' valign='top'></td>
-        <td align='left' valign='top'></td>
-        <td align='left' valign='top'>1</td>
-      </tr>
-      <tr>
-        <td align='left' valign='top'>2</td>
-        <td align='left' valign='top'>3</td>
-        <td align='left' valign='top'>4</td>
-        <td align='left' valign='top'>5</td>
-        <td align='left' valign='top'>6</td>
-        <td align='left' valign='top'>7</td>
-        <td align='left' valign='top'>8</td>
-      </tr>
-      <tr>
-        <td align='left' valign='top'>9</td>
-        <td align='left' valign='top'>10</td>
-        <td align='left' valign='top'>11</td>
-        <td align='left' valign='top'>
-          12 <center>
-            <div id='div1' ondrop='drop001(event)' ondragover='allowDrop001(event)'></div>
-          </center>
-        </td>
-        <td align='left' valign='top'>13</td>
-        <!--This column contains the div in which the image will be dropped in-->
-        <td align='left' valign='top'>
-          14 <center>
-            <div id='div1' ondrop='drop002(event)' ondragover='allowDrop002(event)'></div>
-          </center>
-        </td>
-        <td align='left' valign='top'>15</td>
-      </tr>
-      <tr>
-        <td align='left' valign='top'>16</td>
-        <td align='left' valign='top'>17</td>
-        <td align='left' valign='top'>18</td>
-        <td align='left' valign='top'>19</td>
-        <td align='left' valign='top'>
-          20 <center>
-            <div id='div1' ondrop='drop003(event)' ondragover='allowDrop003(event)'></div>
-          </center>
-        </td>
-        <td align='left' valign='top'>21</td>
-        <td align='left' valign='top'>22</td>
-      </tr>
-      <tr>
-        <td align='left' valign='top'>23</td>
-        <td align='left' valign='top'>24</td>
-        <td align='left' valign='top'>25</td>
-        <td align='left' valign='top'>26</td>
-        <td align='left' valign='top'>27</td>
-        <td align='left' valign='top'>28</td>
-        <td align='left' valign='top'>29</td>
-      </tr>
-      <tr>
-        <td align='left' valign='top'>30</td>
-        <td align='left' valign='top'></td>
-        <td align='left' valign='top'></td>
-        <td align='left' valign='top'></td>
-        <td align='left' valign='top'></td>
-        <td align='left' valign='top'></td>
-        <td align='left' valign='top'></td>
-      </tr>
-</body>
+      /* Text appears in on top*/
+      #instructions {
+        color: white;
+        display: block;
+        font-family: 'ZCOOL KuaiLe', cursive;
+        font-size: 200%;
+      }
+
+      /* the text in the overlay */
+      #overlayText {
+        display: none;
+        font-family: 'ZCOOL KuaiLe', cursive;
+        position: absolute;
+        top: 30%;
+        left: 50%;
+        font-size: 200%;
+        background-color: black;
+        border: 10px;
+        border-style: double;
+        border-radius: 18px;
+        border-color: white;
+        color: white;
+        transform: translate(-50%, -50%);
+      }
+
+      #overlayButton {
+        display: none;
+        font-family: 'ZCOOL KuaiLe', cursive;
+        font-size: 200%;
+        background-color: black;
+        border: 10px;
+        border-style: double;
+        border-radius: 18px;
+        border-color: white;
+        color: white;
+      }
+
+      #calendar {
+        display: block;
+      }
+    </style>
+  </head>
+
+  <body onload='typing()'>
+    <script>
+      var i = 0;
+
+      //instructions
+      var text = "Please place one of the gems on the 12th, one gem on the 14th, and one gem on the 20th."
+
+      //the speed at which the instructions are typed
+      var speed = 100;
+
+      function typing() {
+        if (i < text.length) {
+          document.getElementById('instructions').innerHTML += text.charAt(i);
+          i++;
+          setTimeout(typing, speed);
+        }
+      }
+
+      //how many are dragged in
+      var counter = 0;
+
+      //adds to the counter; if the counter reaches 3, the overlay opens
+      function add() {
+        counter++;
+
+        if (counter == 3) {
+          on();
+        }
+      }
+
+      //opens overlay
+      function on() {
+        document.getElementById("screen").className = "overlay";
+        document.getElementById("overlayText").style.display = "block";
+        document.getElementById("overlayButton").style.display = "block";
+        document.getElementById("calendar").style.display = "none";
+        document.getElementById("instructions").style.display = "none";
+      }
+
+      //allows the image to be dropped
+      function allowDrop001(ev) {
+        ev.preventDefault();
+      }
+
+      function allowDrop002(ev) {
+        ev.preventDefault();
+      }
+
+      function allowDrop003(ev) {
+        ev.preventDefault();
+      }
+      //sets data type and the value of the dragged data
+      function drag001(ev) {
+        ev.dataTransfer.setData("text", ev.target.id);
+      }
+
+      function drag002(ev) {
+        ev.dataTransfer.setData("text", ev.target.id);
+      }
+
+      function drag003(ev) {
+        ev.dataTransfer.setData("text", ev.target.id);
+      }
+      //causes a drop event to occur when the image is dropped
+      function drop001(ev) {
+        ev.preventDefault();
+        var data = ev.dataTransfer.getData("text");
+        ev.target.appendChild(document.getElementById(data));
+
+        add();
+      }
+
+      function drop002(ev) {
+        ev.preventDefault();
+        var data = ev.dataTransfer.getData("text");
+        ev.target.appendChild(document.getElementById(data));
+
+        add();
+      }
+
+      function drop003(ev) {
+        ev.preventDefault();
+        var data = ev.dataTransfer.getData("text");
+        ev.target.appendChild(document.getElementById(data));
+
+        add();
+      }
+
+      function restart() {
+        window.location = "index.html";
+      }
+    </script>
+    <div id='overlayText'>
+      I'm glad I made it out, that was one<br>
+      scary snail. Hey, look, a haunted slug!
+      <br>
+    </div>
+    <center><button id="overlayButton" type="button" onclick="restart()">PLAY AGAIN</center>
+
+    <!--displays the instructions-->
+    <center>
+      <div id='instructions'></div>
+    </center>
+    <!--this image is what will be dragged and dropped into the calendar-->
+    <img id='drag1' src='Heart.png' draggable='true' ondragstart='drag001(event)' width='39px' height='39px'>
+    <img id='drag1' src='Diamond.png' draggable='true' ondragstart='drag002(event)' width='39px' height='39px'>
+    <img id='drag1' src='Emerald.png' draggable='true' ondragstart='drag003(event)' width='39px' height='39px'>
+    <!--This table is the calendar-->
+    <div id="calendar">
+      <center>
+        <table cellspacing='0px' cellpadding='5px' border='1px'>
+          <tr>
+            <th id='title' colspan='7' height='45px' style='font-size: 50px' bgcolor='red'>JUNE</th>
+          </tr>
+          <tr>
+            <th width='75px' bgcolor='white'>SUNDAY</th>
+            <th width='75px' bgcolor='white'>MONDAY</th>
+            <th width='75px' bgcolor='white'>TUESDAY</th>
+            <th width='75px' bgcolor='white'>WEDNESDAY</th>
+            <th width='75px' bgcolor='white'>THURSDAY</th>
+            <th width='75px' bgcolor='white'>FRIDAY</th>
+            <th width='75px' bgcolor='white'>SATURDAY</th>
+          </tr>
+          <tr>
+            <td align='left' valign='top'></td>
+            <td align='left' valign='top'></td>
+            <td align='left' valign='top'></td>
+            <td align='left' valign='top'></td>
+            <td align='left' valign='top'></td>
+            <td align='left' valign='top'></td>
+            <td align='left' valign='top'>1</td>
+          </tr>
+          <tr>
+            <td align='left' valign='top'>2</td>
+            <td align='left' valign='top'>3</td>
+            <td align='left' valign='top'>4</td>
+            <td align='left' valign='top'>5</td>
+            <td align='left' valign='top'>6</td>
+            <td align='left' valign='top'>7</td>
+            <td align='left' valign='top'>8</td>
+          </tr>
+          <tr>
+            <td align='left' valign='top'>9</td>
+            <td align='left' valign='top'>10</td>
+            <td align='left' valign='top'>11</td>
+            <td align='left' valign='top'>
+              12 <center>
+                <div id='div1' ondrop='drop001(event)' ondragover='allowDrop001(event)'></div>
+              </center>
+            </td>
+            <td align='left' valign='top'>13</td>
+            <!--This column contains the div in which the image will be dropped in-->
+            <td align='left' valign='top'>
+              14 <center>
+                <div id='div1' ondrop='drop002(event)' ondragover='allowDrop002(event)'></div>
+              </center>
+            </td>
+            <td align='left' valign='top'>15</td>
+          </tr>
+          <tr>
+            <td align='left' valign='top'>16</td>
+            <td align='left' valign='top'>17</td>
+            <td align='left' valign='top'>18</td>
+            <td align='left' valign='top'>19</td>
+            <td align='left' valign='top'>
+              20 <center>
+                <div id='div1' ondrop='drop003(event)' ondragover='allowDrop003(event)'></div>
+              </center>
+            </td>
+            <td align='left' valign='top'>21</td>
+            <td align='left' valign='top'>22</td>
+          </tr>
+          <tr>
+            <td align='left' valign='top'>23</td>
+            <td align='left' valign='top'>24</td>
+            <td align='left' valign='top'>25</td>
+            <td align='left' valign='top'>26</td>
+            <td align='left' valign='top'>27</td>
+            <td align='left' valign='top'>28</td>
+            <td align='left' valign='top'>29</td>
+          </tr>
+          <tr>
+            <td align='left' valign='top'>30</td>
+            <td align='left' valign='top'></td>
+            <td align='left' valign='top'></td>
+            <td align='left' valign='top'></td>
+            <td align='left' valign='top'></td>
+            <td align='left' valign='top'></td>
+            <td align='left' valign='top'></td>
+          </tr>
+      </center>
+    </div>
+  </body>
 
 </html>

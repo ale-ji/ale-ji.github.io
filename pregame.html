@@ -10,6 +10,14 @@
         z-index: 0;
       }
 
+      html {
+        background: url(stage1.png) no-repeat center center fixed;
+        -webkit-background-size: cover;
+        -moz-background-size: cover;
+        -o-background-size: cover;
+        background-size: cover;
+      }
+
       /* creates box for messages */
       .messages {
         position: absolute;
@@ -49,7 +57,7 @@
     </style>
   </head>
 
-  <body background="stage1.png">
+  <body>
     <center>
 
       <!-- Image of door as button -->
@@ -69,7 +77,7 @@
         // two separate messages to be shown
         var dataText = [
           "Have you come to find the gems?",
-          "I'll give it to you...if you can make it out alive"
+          "I'll give them to you...if you can make it out alive"
         ]
 
         // keeps calling itself until text fully displayed

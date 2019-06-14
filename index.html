@@ -1,52 +1,57 @@
 <link href="https://fonts.googleapis.com/css?family=ZCOOL+KuaiLe&display=swap" rel="stylesheet">
 <html>
-<head>
-   <style>
-    h1.text {
-      position: absolute;
-      top: 10%;
-      font-family: 'ZCOOL KuaiLe', cursive;
-      font-size: 400%;
-      color: white;
-      text-align: center;
-      margin-left: 30%;
-    }
+
+  <head>
+    <style>
+      h1.text {
+        position: absolute;
+        top: 10%;
+        font-family: 'ZCOOL KuaiLe', cursive;
+        font-size: 400%;
+        color: white;
+        text-align: center;
+        margin-left: 30%;
+      }
+
+      html {
+        background: url(home2.png) no-repeat center center fixed;
+        -webkit-background-size: cover;
+        -moz-background-size: cover;
+        -o-background-size: cover;
+        background-size: cover;
+      }
+
+      button.text {
+        outline: 0;
+        position: absolute;
+        top: 62%;
+        width: 24%;
+        height: 14%;
+        background-color: black;
+        border: 10px;
+        border-style: double;
+        border-radius: 18px;
+        border-color: white;
+        color: white;
+        font-family: 'ZCOOL KuaiLe', cursive;
+        font-size: 300%;
+        text-align: center;
+        margin-left: 40%;
+      }
+    </style>
+  </head>
+
+  <body>
+    <h1 class="text">The Haunted Snail</h1>
+    <button class="text" type="button" onclick="goPreGame()">PLAY
+
+      <script>
+        function goPreGame() {
+          window.location = "pregame.html";
+        }
+      </script>
 
 
-    button.text {
-      outline: 0;
-      position: absolute;
-      top: 62%;
-      width: 24%;
-      height: 14%;
-      background-color: black;
-      border: 10px;
-      border-style: double;
-      border-radius: 18px;
-      border-color: white;
-      color: white;
-      font-family: 'ZCOOL KuaiLe', cursive;
-      font-size: 300%;
-      text-align: center;
-      margin-left: 40%;
-    }
-
-   </style>
-</head>
-
-<body background = "home2.png">
-  <h1 class="text">The Haunted Snail</h1>
-  <button class="text" type="button" onclick="goPreGame()">PLAY
-
-    <script>
-
-    function goPreGame() {
-      window.location = "pregame.html";
-    }
-
-    </script>
-
-
-</body>
+  </body>
 
 </html>

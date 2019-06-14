@@ -115,11 +115,15 @@
     <script src="worldmap.js">
     </script>
     <script>
-      var dateNumber = 147 - 1;
+      //instructions
+	  alert('Use W A S D to move the zombie unicorn');
+	  
+	  var dateNumber = 147 - 1;
       Dcounter = -1;
       var month, day;
 
-      function calendar() {
+      //function for the calender
+	  function calendar() {
         Dcounter++;
         dateNumber++;
         if (dateNumber > 0 && dateNumber <= 31) {

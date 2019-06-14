@@ -34,16 +34,55 @@
       font-family: 'ZCOOL KuaiLe', cursive;
       font-size: 200%;
     }
+	
+	/* the overlay */
+	#overlay {
+		position: fixed;
+		display: none;
+		width: 100%;
+		height: 100%;
+		top: 0;
+		left: 0;
+		right: 0;
+		bottom: 0;
+		background-color: black;
+	}
+	
+	/* the text in the overlay */
+	#text {
+		position: absolute;
+		top: 50%;
+		left: 50%;
+		font-size: 50px;
+		color: white;
+		transform: translate(-50%,-50%);
+	}
   </style>
 </head>
 
 <body onload='typing()'>
   <script>
     var i = 0;
-    var text = "Please place one of the gems on the 12th, one gem on the 14th, and one gem on the 20th."
-    var speed = 100;
+    
+	//instructions
+	
+	var text = "Please place one of the gems on the 12th, one gem on the 14th, and one gem on the 20th."
+    //the speed at which the instructions are typed
+	var speed = 100;
 
-    function typing() {
+	//how many are dragged in 
+	var counter = 0;
+	
+    //adds to the counter; if the counter reaches 3, the overlay opens
+	function add() {
+		counter++;
+		
+		if (counter == 3){
+			on();
+		}
+	}
+	
+	function typing() {
       if (i < text.length) {
         document.getElementById('display').innerHTML += text.charAt(i);
         i++;
@@ -79,20 +118,45 @@
       ev.preventDefault();
       var data = ev.dataTransfer.getData("text");
       ev.target.appendChild(document.getElementById(data));
+	  
+	  add();
     }
 
     function drop002(ev) {
       ev.preventDefault();
       var data = ev.dataTransfer.getData("text");
       ev.target.appendChild(document.getElementById(data));
+	  
+	  add();
     }
 
     function drop003(ev) {
       ev.preventDefault();
       var data = ev.dataTransfer.getData("text");
-      ev.target.appendChild(document.getElementById(data));
+      ev.target.appendChild(document.getElementById(data)); 
+	  
+	  add();
     }
+	
+	//opens overlay
+	function on() {
+		document.getElementById("overlay").style.display = "block";
+	}
+	
+	function restart() {
+		window.location = "index.html";
+	}
+  
   </script>
+  <div id='overlay'>
+	<div id='text'>
+		YOU WIN!
+		<br>
+		<center><button class="text" type="button" onclick="restart()">PLAY AGAIN</center>
+	</div>
+  </div>
+  
+  <!--displays the instructions-->
   <center>
     <p id='display'></p>
   </center>

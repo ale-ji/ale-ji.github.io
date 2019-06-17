@@ -7,7 +7,6 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <style>
       canvas {
-        /* border: 1px solid #d3d3d3; */
         background-color: #f1f1f1;
         z-index: 0;
         position: absolute;
@@ -25,22 +24,16 @@
         font-size: 24px;
       }
 
-      #days {
-        float: right;
-        color: white;
-        font-family: 'ZCOOL KuaiLe', cursive;
-        font-size: 24px;
-      }
-
-      #gemsCollected {
+      #gemIndex {
         float: left;
         color: white;
         font-family: 'ZCOOL KuaiLe', cursive;
         font-size: 24px;
       }
 
-      /* Text appears in box */
-      #typedtext {
+      /* Text types itself in black box */
+      /* Influenced by games like Undertale */
+      #typedText {
         position: absolute;
         background-color: black;
         border: 10px;
@@ -49,7 +42,7 @@
         border-color: white;
         color: white;
         width: 54%;
-        height: 25%;
+        height: 20%;
         top: 80%;
         margin-left: 22%;
         font-family: 'ZCOOL KuaiLe', cursive;
@@ -63,11 +56,9 @@
         width: 100%;
       }
 
-      #image {
-        height: 5%;
-        width: 5%;
-      }
-
+      /* small canvas surrounded by black background */
+      /* effect of being in the dark, only being
+      able to see small area around you */
       body {
         background-color: black;
       }
@@ -87,24 +78,23 @@
   </head>
 
   <body>
-    <div id="days"></div>
     <div id="clock"></div>
-    <div id="gemsCollected">Gems Required:</div>
+    <div id="gemIndex">Gems Required:</div>
     <div class="row">
       <div class="column">
-        <img class="gems" src="Heart.png">
+        <img class="gems" src="heart.png">
       </div>
       <div class="column">
-        <img class="gems" src="Diamond.png">
+        <img class="gems" src="diamond.png">
       </div>
       <div class="column">
-        <img class="gems" src="Emerald.png">
+        <img class="gems" src="emerald.png">
       </div>
     </div>
     <center>
       <canvas id="myCanvas"></canvas>
     </center>
-    <div id="typedtext"></div>
+    <div id="typedText"></div>
 
     <script src="game.js">
     </script>
@@ -115,15 +105,17 @@
     <script src="worldmap.js">
     </script>
     <script>
-      //instructions
-	  alert('Use W A S D to move the zombie unicorn');
-	  
-	  var dateNumber = 147 - 1;
-      Dcounter = -1;
+      // random date out of 365 of year
+      var dateNumber = 147 - 1;
+
+      // calendar function adds 1 to Dcounter every time it's called so
+      // Dcounter starts at 0, progresses from there
+      var Dcounter = -1;
       var month, day;
 
-      //function for the calender
-	  function calendar() {
+      // shows passage of time inside snail
+      // makes player feel trapped for long period of time
+      function calendar() {
         Dcounter++;
         dateNumber++;
         if (dateNumber > 0 && dateNumber <= 31) {
@@ -164,15 +156,19 @@
         }
         console.log(counter);
         document.getElementById("clock").innerHTML = month + " " + day + " 2019 " + "--------------" + " Days Passed: " + Dcounter
-        // document.getElementById("days").innerHTML = "Days Passed: " + Dcounter
       }
+
       calendar();
+
+      // every 20 seconds player spends in maze = 1 day
       setInterval(calendar, 20000);
     </script>
     <script>
+      // some bits of typewriter function taken from CSS-Tricks
       setInterval(typewriter, 10000);
 
       // each item in array is new line
+      // using <br> causes each line to type at once
       var aText = new Array(
         "This snail is so spooky...",
         "We have to find the gems",
@@ -180,28 +176,36 @@
       );
 
       var iSpeed = 100; // time delay of print out
-      var iIndex = 0; // start printing array at this posision
-      var iArrLength = aText[0].length; // the length of the text array
+      var iPosition = 0; // start printing array at first line
+      var iArrLength = aText[0].length; // length of first line
       var iScrollAt = 20; // start scrolling up at this many lines
-      var iTextPos = 0; // initialise text position
+      var iIndex = 0; // start printing array from first character
       var sContents = ''; // initialise contents variable
       var iRow; // initialise current row
 
       // animate text to look like it's being typed
       function typewriter() {
         sContents = ' ';
-        iRow = Math.max(0, iIndex - iScrollAt);
-        var destination = document.getElementById("typedtext");
+        iRow = Math.max(0, iPosition - iScrollAt);
+        var destination = document.getElementById("typedText");
 
-        while (iRow < iIndex) {
+        // prints new lines of text
+        while (iRow < iPosition) {
           sContents += aText[iRow++] + '<br />';
         }
-        destination.innerHTML = sContents + aText[iIndex].substring(0, iTextPos) + "_";
-        if (iTextPos++ == iArrLength) {
-          iTextPos = 0;
-          iIndex++;
-          if (iIndex != aText.length) {
-            iArrLength = aText[iIndex].length;
+
+        // prints letters one after another
+        destination.innerHTML = sContents + aText[iPosition].substring(0, iIndex) + "_";
+
+        // once line is finished printing, move on to second line
+        if (iIndex++ == iArrLength) {
+          iIndex = 0;
+          iPosition++;
+
+          // wait a bit longer before new line starts printing
+          // repeat until all lines are printed
+          if (iPosition != aText.length) {
+            iArrLength = aText[iPosition].length;
             setTimeout("typewriter()", 500);
           }
         } else {

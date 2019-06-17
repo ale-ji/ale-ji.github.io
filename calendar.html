@@ -3,6 +3,8 @@
 
   <head>
     <style>
+      /* overlay background for when gems are in place */
+      /* fits image to all screens */
       html.overlay {
         background: url(end.png) no-repeat center center fixed;
         -webkit-background-size: cover;
@@ -11,6 +13,7 @@
         background-size: cover;
       }
 
+      /* first background for calendar */
       html.black {
         background-color: black;
       }
@@ -36,7 +39,7 @@
         font-family: 'ZCOOL KuaiLe', cursive;
       }
 
-      /* Text appears in on top*/
+      /* Text appears on top*/
       #instructions {
         color: white;
         display: block;
@@ -63,6 +66,7 @@
 
       #overlayButton {
         display: none;
+        outline: 0;
         font-family: 'ZCOOL KuaiLe', cursive;
         font-size: 200%;
         background-color: black;
@@ -73,6 +77,7 @@
         color: white;
       }
 
+      /* show calendar */
       #calendar {
         display: block;
       }
@@ -86,7 +91,7 @@
       //instructions
       var text = "Please place one of the gems on the 12th, one gem on the 14th, and one gem on the 20th."
 
-      //the speed at which the instructions are typed
+      // speed at which instructions are typed
       var speed = 100;
 
       function typing() {
@@ -97,20 +102,21 @@
         }
       }
 
-      //how many are dragged in
+      // how many gems are dragged in
       var counter = 0;
 
-      //adds to the counter; if the counter reaches 3, the overlay opens
+      // adds to the counter; if the counter reaches 3, the overlay opens
       function add() {
         counter++;
 
         if (counter == 3) {
-          on();
+          openOverlay();
         }
       }
 
-      //opens overlay
-      function on() {
+      // opens overlay
+      // hide stuff from calendar screen, show new background/text/button
+      function openOverlay() {
         document.getElementById("screen").className = "overlay";
         document.getElementById("overlayText").style.display = "block";
         document.getElementById("overlayButton").style.display = "block";
@@ -142,6 +148,7 @@
       function drag003(ev) {
         ev.dataTransfer.setData("text", ev.target.id);
       }
+
       //causes a drop event to occur when the image is dropped
       function drop001(ev) {
         ev.preventDefault();
@@ -183,9 +190,9 @@
       <div id='instructions'></div>
     </center>
     <!--this image is what will be dragged and dropped into the calendar-->
-    <img id='drag1' src='Heart.png' draggable='true' ondragstart='drag001(event)' width='39px' height='39px'>
-    <img id='drag1' src='Diamond.png' draggable='true' ondragstart='drag002(event)' width='39px' height='39px'>
-    <img id='drag1' src='Emerald.png' draggable='true' ondragstart='drag003(event)' width='39px' height='39px'>
+    <img id='drag1' src='heart.png' draggable='true' ondragstart='drag001(event)' width='39px' height='39px'>
+    <img id='drag1' src='diamond.png' draggable='true' ondragstart='drag002(event)' width='39px' height='39px'>
+    <img id='drag1' src='emerald.png' draggable='true' ondragstart='drag003(event)' width='39px' height='39px'>
     <!--This table is the calendar-->
     <div id="calendar">
       <center>

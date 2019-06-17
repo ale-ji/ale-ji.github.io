@@ -10,6 +10,7 @@
         z-index: 0;
       }
 
+      /* fits image to all screens */
       html {
         background: url(stage1.png) no-repeat center center fixed;
         -webkit-background-size: cover;
@@ -20,7 +21,7 @@
 
       /* creates box for messages */
       .messages {
-        position: absolute;
+        position: fixed;
         background-color: black;
         border: 10px;
         border-style: double;
@@ -29,7 +30,7 @@
         color: white;
         width: 54%;
         height: 15%;
-        top: 90%;
+        top: 80%;
         margin-left: 24%;
         font-family: 'ZCOOL KuaiLe', cursive;
         font-size: 300%;
@@ -38,7 +39,9 @@
       }
 
       #door {
-        margin-top: 40%;
+        position: fixed;
+        top: 65%;
+        right: 40%;
         width: 14%;
         height: 14%;
         outline: 0;

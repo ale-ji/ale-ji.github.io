@@ -8,10 +8,6 @@ wallImg.src = "wall.png";
 var groundImg = new Image();
 groundImg.src = "dirt.jpg";
 
-var gemImg = new Image();
-gemImg.src = "heart.png";
-
-
 //1 = wall
 //0 = open area
 
@@ -32,6 +28,8 @@ var worldMap = [
   [1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 1],
   [1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1],
 ];
+
+// number of items in one of the number arrays = columns
 var columns = worldMap[0].length;
 
 // number of number arrays = rows
@@ -39,7 +37,7 @@ var rows = worldMap.length;
 var scaleUp = 1;
 var i, j;
 console.log(columns * Tile_H);
-console.log(rows * Tile_W)
+console.log(rows * Tile_W);
 
 function drawTiles(map) {
   for (i = 0; i < rows; i++) {
@@ -61,8 +59,8 @@ function pixelY(row) {
   return row * Tile_H
 }
 
-// core based on jeff
-
+// returns which tile player is on
+// elaborated upon in game.js
 function pixelToGridX(nextX) {
   return Math.floor(nextX / Tile_W)
 }

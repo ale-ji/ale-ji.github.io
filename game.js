@@ -1,8 +1,4 @@
-startGame();
-
-function startGame() {
-  setInterval(updateGameArea, 20);
-}
+setInterval(updateGameArea, 20);
 
 var viewPort;
 var canvas, ctx;
@@ -12,13 +8,13 @@ ctx.canvas.height = 400;
 ctx.canvas.width = 400;
 
 var gem1 = new Image();
-gem1.src = "Heart.png";
+gem1.src = "heart.png";
 
 var gem2 = new Image();
-gem2.src = "Diamond.png";
+gem2.src = "diamond.png";
 
 var gem3 = new Image();
-gem3.src = "Emerald.png";
+gem3.src = "emerald.png";
 
 // character object created by function, size and spawn location
 var myGamePiece = new Player(100, 100, 560, 560);
@@ -79,25 +75,31 @@ function Player(width, height, x, y) {
 
 
 function camera() {
-  var camerax = -(myGamePiece.x - canvas.width / 2);
-  var cameray = -(myGamePiece.y - canvas.height / 2);
+
+  // minus sign in front: player moves left, camera moves right and vice versa
+  // same with up and down
+  // - canvas width divided by 2 puts player in center
+  var cameraX = -(myGamePiece.x - canvas.width / 2);
+  var cameraY = -(myGamePiece.y - canvas.height / 2);
   ctx.save();
   if (myGamePiece.x < canvas.width / 2) {
-    // console.log("k");
-    camerax = 0
+    cameraX = 0;
   }
+
   if (myGamePiece.y < canvas.height / 2) {
-    cameray = 0
+    cameraY = 0
   }
-  if (myGamePiece.x > 34 * 140 - canvas.width / 2) {
-    camerax = -(34 * 140 - canvas.width);
-    // console.log(columns * Tile_W - canvas.width)
+
+
+  if (myGamePiece.x > columns * Tile_W - canvas.width / 2) {
+    cameraX = -(columns * Tile_W - canvas.width);
   }
-  if (myGamePiece.y > 15 * 140 - canvas.height / 2) {
-    cameray = -(15 * 140 - canvas.height);
-    // console.log(rows * Tile_H - canvas.height / 2)
+
+  if (myGamePiece.y > rows * Tile_H - canvas.height / 2) {
+    cameraY = -(rows * Tile_H - canvas.height);
   }
-  ctx.translate(camerax, cameray);
+
+  ctx.translate(cameraX, cameraY);
 }
 
 window.addEventListener('keydown', function() {
@@ -107,99 +109,76 @@ window.addEventListener('keydown', function() {
   }
 }, true);
 
-var isUP = true;
-var dx, dy;
-var counter = 0;
-var foundHeart = false;
-
-function gemStone() {
-  dy = 6 * 140 + 50 / 2;
-  dx = 11 * 140 + 50 / 2;
-  // console.log(myGamePiece.x, myGamePiece.y, dx, dy, "diamonds")
+function gemHover() {
   counter++;
   if (counter > 20) {
     counter = 1
-    isUP = !isUP
+    up = !up
   }
-  if (isUP) {
+
+  // floating effect, gem moves up and down
+  // function constantly getting called by updateGameArea so
+  // moves up and down quickly
+  if (up) {
     dy = dy + 2
-    // console.log("l")
   } else {
     dy = dy - 2
   }
+}
 
-  // console.log(myGamePiece.x, dx, dx + 90);
+// coordinates for gems, didn't want to mix up with player location
+var dx, dy;
+var counter = 0;
+var foundHeart = false;
+var up = true;
+
+function gemStone1() {
+  dy = 6 * 140 + 50 / 2;
+  dx = 11 * 140 + 50 / 2;
+  gemHover();
+
   if ((myGamePiece.x >= dx && myGamePiece.x <= dx + 90) &&
     (myGamePiece.y >= dy && myGamePiece.y <= dy + 90)) {
     foundHeart = true;
   }
 
+  // draw gem until player finds it
   if (!foundHeart) {
     ctx.drawImage(gem1, dx, dy, 90, 90);
-    // console.log(x,y,"diamond");
   }
 }
 
-var isDown = true;
-var fcounter = 0;
 var foundDiamond = false;
 
 function gemStone2() {
   dy = 1 * 140 + 50 / 2
   dx = 5 * 140 + 50 / 2
-  // console.log(myGamePiece.x, myGamePiece.y, dx, dy, "diamonds")
-  fcounter++;
-  if (fcounter > 20) {
-    fcounter = 1
-    isDown = !isDown
-  }
-  if (isDown) {
-    dy = dy + 2
-    // console.log("l")
-  } else {
-    dy = dy - 2
-  }
+  gemHover();
 
   if ((myGamePiece.x >= dx && myGamePiece.x <= dx + 90) &&
     (myGamePiece.y >= dy && myGamePiece.y <= dy + 90)) {
-    console.log("k")
 
     foundDiamond = true
   }
   if (!foundDiamond) {
     ctx.drawImage(gem2, dx, dy, 90, 90);
-    // console.log(x,y,"diamond");
   }
 }
 
-var isLeft = true;
-var hcounter = 0;
 var foundEmerald = false;
 
 function gemStone3() {
   dy = 6 * 140 + 50 / 2
   dx = 1 * 140 + 50 / 2
-  // console.log(myGamePiece.x, myGamePiece.y, dx, dy, "diamonds")
-  hcounter++;
-  if (hcounter > 20) {
-    hcounter = 1
-    isLeft = !isLeft
-  }
-  if (isDown) {
-    dy = dy + 2
-    // console.log("l")
-  } else {
-    dy = dy - 2
-  }
+  gemHover();
 
   if ((myGamePiece.x >= dx && myGamePiece.x <= dx + 90) &&
     (myGamePiece.y >= dy && myGamePiece.y <= dy + 90)) {
-    console.log("k")
-    foundEmerald = true
+    foundEmerald = true;
   }
+
   if (!foundEmerald) {
     ctx.drawImage(gem3, dx, dy, 90, 90);
-    // console.log(x,y,"diamond");
   }
 }
 
@@ -208,7 +187,7 @@ function updateGameArea() {
   drawTiles(worldMap);
   myGamePiece.update();
   myGamePiece.newPos();
-  gemStone();
+  gemStone1();
   gemStone2();
   gemStone3();
   ctx.restore();
